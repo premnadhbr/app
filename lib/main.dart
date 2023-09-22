@@ -3,8 +3,7 @@ import 'package:bloc_mini_project_hive/utils/constants/app_theme.dart';
 import 'package:bloc_mini_project_hive/view/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/adapters.dart';
+
 
 void main() {
   runApp(MultiBlocProvider(
@@ -16,7 +15,7 @@ void main() {
       //   create: (context) => SubjectBloc(),
       // ),
     ],
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 
