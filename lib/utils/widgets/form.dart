@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 
 import 'package:bloc_mini_project_hive/utils/constants/constants.dart';
 
+// ignore: must_be_immutable
 class CustomFormWidget extends StatelessWidget {
   var bloc;
   var image;

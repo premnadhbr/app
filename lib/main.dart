@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           theme: lightTheme,
           darkTheme: darkTheme,
           themeMode: state,
-          home: HomeScreen(),
+          home:const  HomeScreen(),
         );
       },
     );

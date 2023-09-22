@@ -1,8 +1,8 @@
 import 'package:bloc_mini_project_hive/controller/home/bloc/home_bloc.dart';
 import 'package:bloc_mini_project_hive/utils/constants/constants.dart';
 import 'package:bloc_mini_project_hive/view/add_student/addScreen.dart';
-import 'package:bloc_mini_project_hive/view/details_student/details.dart';
 import 'package:bloc_mini_project_hive/view/home/home_widget/cardmenu.dart';
+import 'package:bloc_mini_project_hive/view/student_list/students_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../controller/theme/bloc/theme_bloc.dart';
@@ -30,11 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context) => AddStudentPage(),
               ));
         } else if (state is HomeNavigateToStudentListPageActionState) {
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (context) => StudentDetails(),
-          //     ));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => StudentsPage(),
+              ));
         }
       },
       builder: (context, state) {
