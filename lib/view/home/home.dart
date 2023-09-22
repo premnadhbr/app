@@ -30,11 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context) => AddStudentPage(),
               ));
         } else if (state is HomeNavigateToStudentListPageActionState) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => StudentDetails(),
-              ));
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) => StudentDetails(),
+          //     ));
         }
       },
       builder: (context, state) {
