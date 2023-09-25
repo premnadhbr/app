@@ -25,10 +25,4 @@ class NavigateToStudentsDetailsPageActionState extends StudentsActionState {
   });
 }
 
-
-// class StudentDeletedActionState extends StudentsActionState {}
-
-// class NavigateToStudentsDetailsPageActionState extends StudentsActionState {
-//   final int index;
-//   NavigateToStudentsDetailsPageActionState({required this.index});
-// }
+class StudentDeletedActionState extends StudentsActionState {}

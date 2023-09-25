@@ -29,19 +29,14 @@ class _StudentsPageState extends State<StudentsPage> {
       listenWhen: (previous, current) => current is StudentsActionState,
       buildWhen: (previous, current) => current is! StudentsActionState,
       listener: (context, state) {
-        // if (state is NavigateToStudentsDetailsPageActionState) {
-        //   GoRouter.of(context).pushNamed(RoutingConstants.detailsRouteName,
-        //       pathParameters: {'index': state.index.toString()});
-        // } else if (state is StudentDeletedActionState) {
-        //   studentsBloc.add(StudentsInitialEvent());
-        //   GoRouter.of(context).pop(true);
-        // }
         if (state is NavigateToStudentsDetailsPageActionState) {
           Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => StudentDetails(index: state.index),
               ));
+        } else if (state is StudentDeletedActionState) {
+          studentsBloc.add(StudentsInitialEvent());
         }
       },
       builder: (context, state) {
