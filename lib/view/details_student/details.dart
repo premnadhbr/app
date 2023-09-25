@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:bloc_mini_project_hive/controller/details/bloc/details_bloc.dart';
 import 'package:bloc_mini_project_hive/utils/constants/constants.dart';
 import 'package:bloc_mini_project_hive/utils/widgets/form.dart';
@@ -17,6 +16,7 @@ class StudentDetails extends StatefulWidget {
 }
 
 class _StudentDetailsState extends State<StudentDetails> {
+  bool enabled = false;
   DetailsBloc detailsBloc = DetailsBloc();
   @override
   void initState() {
@@ -28,9 +28,17 @@ class _StudentDetailsState extends State<StudentDetails> {
   Widget build(BuildContext context) {
     return BlocConsumer<DetailsBloc, DetailsState>(
       bloc: detailsBloc,
-      // buildWhen:(previous, current) => ,
-      // listenWhen: (previous, current) => ,
-      listener: (context, state) {},
+      buildWhen: (previous, current) => current is! DetailsActionstate,
+      listenWhen: (previous, current) => current is DetailsActionstate,
+      listener: (context, state) {
+        if (state is EditEnabledState) {
+          enabled = !enabled;
+          detailsBloc.add(DetailsInitialEvent());
+        } else if (state is DetailsUpdatedState) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text('Student Detail Updated')));
+        }
+      },
       builder: (context, state) {
         if (state is DetailsLoadingState) {
           return Scaffold(
@@ -40,14 +48,22 @@ class _StudentDetailsState extends State<StudentDetails> {
           );
         } else if (state is DetailsLoadedsuccessState) {
           var db = state.students;
-          var img = db[widget.index][Constants.imageString];
+          var img = db[widget.index]["image"];
 
           return Scaffold(
             appBar: AppBar(
-              actions: [IconButton(onPressed: () {}, icon: Constants.editIcon)],
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      detailsBloc.add(EditClickedEvent());
+                    },
+                    icon: Constants.editIcon)
+              ],
             ),
             body: SingleChildScrollView(
               child: Stack(
+                clipBehavior: Clip.none,
+                alignment: Alignment.center,
                 children: [
                   Column(
                     children: [
@@ -60,29 +76,33 @@ class _StudentDetailsState extends State<StudentDetails> {
                         margin: Constants.detailsPadding,
                         width: double.infinity,
                         child: CustomFormWidget(
+                          enabled: enabled,
                           bloc: detailsBloc,
                           option: false,
-                          address: db[widget.index][Constants.addressString],
-                          age: db[widget.index][Constants.ageString],
-                          batch: db[widget.index][Constants.divisionString],
-                          bloodgroup: db[widget.index][Constants.bloodString],
-                          contact: db[widget.index][Constants.contactString],
-                          image: db[widget.index][Constants.imageString],
-                          index: db[widget.index][Constants.idString],
-                          name: db[widget.index][Constants.imageString],
+                          address: db[widget.index]["address"],
+                          age: db[widget.index]["age"],
+                          batch: db[widget.index]["division"],
+                          bloodgroup: db[widget.index]["bloodgroup"],
+                          contact: db[widget.index]["contact"],
+                          image: db[widget.index]["image"],
+                          index: db[widget.index]["id"],
+                          name: db[widget.index]["name"],
                         ),
                       ),
                       Constants.heightSized,
                     ],
                   ),
                   Positioned(
-                      top: Constants.detailsContainerHeight / 2,
-                      child: Constants.detailsCircleAvatarBg),
+                    top: Constants.detailsContainerHeight / 2.1,
+                    child: Constants.detailsCircleAvatarBg,
+                  ),
                   Positioned(
-                      child: CircleAvatar(
-                    radius: Constants.detailsContainerHeight / 2,
-                    backgroundImage: MemoryImage(img),
-                  ))
+                    top: Constants.detailsContainerHeight / 2,
+                    child: CircleAvatar(
+                      radius: Constants.detailsContainerHeight / 2,
+                      backgroundImage: MemoryImage(img),
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -3,6 +3,8 @@ part of 'details_bloc.dart';
 
 abstract class DetailsState {}
 
+class DetailsActionstate extends DetailsState {}
+
 class DetailsInitial extends DetailsState {}
 
 class DetailsLoadingState extends DetailsState {}
@@ -14,4 +16,8 @@ class DetailsLoadedsuccessState extends DetailsState {
   });
 }
 
+class DetailsUpdatedState extends DetailsActionstate {}
+
 class DetailsErrorState extends DetailsState {}
+
+class EditEnabledState extends DetailsActionstate {}

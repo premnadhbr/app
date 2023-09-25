@@ -1,10 +1,10 @@
+import 'package:bloc_mini_project_hive/view/details_student/details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../controller/studentlist/bloc/students_bloc.dart';
+import '../../controller/studentLIst/bloc/students_bloc.dart';
 import '../../utils/constants/constants.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-
 
 class StudentsPage extends StatefulWidget {
   const StudentsPage({super.key});
@@ -14,13 +14,14 @@ class StudentsPage extends StatefulWidget {
 }
 
 class _StudentsPageState extends State<StudentsPage> {
+  late StudentsBloc studentsBloc;
   @override
   void initState() {
     super.initState();
+    studentsBloc = StudentsBloc();
     studentsBloc.add(StudentsInitialEvent());
   }
 
-  final StudentsBloc studentsBloc = StudentsBloc();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
@@ -35,6 +36,13 @@ class _StudentsPageState extends State<StudentsPage> {
         //   studentsBloc.add(StudentsInitialEvent());
         //   GoRouter.of(context).pop(true);
         // }
+        if (state is NavigateToStudentsDetailsPageActionState) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => StudentDetails(index: state.index),
+              ));
+        }
       },
       builder: (context, state) {
         if (state is StudentsLoadingState) {
@@ -44,16 +52,10 @@ class _StudentsPageState extends State<StudentsPage> {
             ),
           );
         } else if (state is StudentsLoadedState) {
+          final successState = state as StudentsLoadedState;
           return Scaffold(
               appBar: AppBar(
                 title: Constants.studentListTitle,
-                actions: [
-                  IconButton(
-                    onPressed: () =>
-                        studentsBloc.add(StudentButtonClearEvent()),
-                    icon: Constants.deleteIcon,
-                  )
-                ],
               ),
               body: LiquidPullToRefresh(
                 color: Colors.transparent,
@@ -61,8 +63,7 @@ class _StudentsPageState extends State<StudentsPage> {
                 child: ListView.builder(
                   itemCount: state.students.length,
                   itemBuilder: (context, index) {
-                    var db = state.students;
-                    var img = db[index][Constants.imageString];
+                    var img = successState.students[index]["image"];
                     final imageWidget = img != null
                         ? CircleAvatar(
                             backgroundImage: MemoryImage(img),
@@ -74,8 +75,8 @@ class _StudentsPageState extends State<StudentsPage> {
                         SlidableAction(
                           icon: Icons.delete,
                           onPressed: (context) {
-                            studentsBloc.add(DeleteClickedEvent(
-                                index: db[index][Constants.idString]));
+                            // studentsBloc.add(DeleteClickedEvent(
+                            //     index: successState.students[index]["id"]));
                           },
                         ),
                       ]),
@@ -88,9 +89,10 @@ class _StudentsPageState extends State<StudentsPage> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
                           leading: imageWidget,
-                          title: Text("${db[index][Constants.nameString]}"),
-                          subtitle:
-                              Text("${db[index][Constants.divisionString]}"),
+                          title:
+                              Text("${successState.students[index]["name"]}"),
+                          subtitle: Text(
+                              "${successState.students[index]["division"]}"),
                           trailing: const Icon(Icons.chevron_right_rounded),
                         ),
                       ),

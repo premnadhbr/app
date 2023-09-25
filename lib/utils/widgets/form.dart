@@ -1,18 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:typed_data';
-
-import 'package:bloc_mini_project_hive/controller/addStudent/bloc/add_student_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:bloc_mini_project_hive/controller/addStudent/bloc/add_student_bloc.dart';
 import 'package:bloc_mini_project_hive/utils/constants/constants.dart';
-
+import '../../controller/details/bloc/details_bloc.dart';
 // ignore: must_be_immutable
 class CustomFormWidget extends StatelessWidget {
   var bloc;
   var image;
   bool option;
+  bool enabled;
   String? name;
   int? age;
   String? address;
@@ -25,6 +24,7 @@ class CustomFormWidget extends StatelessWidget {
     required this.bloc,
     this.image,
     required this.option,
+    required this.enabled,
     this.name,
     this.age,
     this.address,
@@ -62,6 +62,7 @@ class CustomFormWidget extends StatelessWidget {
         children: [
           const SizedBox(height: 20),
           TextFormField(
+            enabled: enabled,
             controller: nameEditingController,
             decoration: InputDecoration(
               hintText: Constants.nameHint,
@@ -71,6 +72,7 @@ class CustomFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           TextFormField(
+            enabled: enabled,
             maxLength: 2,
             decoration: InputDecoration(
               hintText: Constants.ageHint,
@@ -81,6 +83,7 @@ class CustomFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           TextFormField(
+            enabled: enabled,
             controller: numberEditingController,
             decoration: InputDecoration(
                 hintText: Constants.numberHint,
@@ -89,6 +92,7 @@ class CustomFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           TextFormField(
+            enabled: enabled,
             controller: addressEditingController,
             decoration: InputDecoration(
               hintText: Constants.addressHint,
@@ -98,6 +102,7 @@ class CustomFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           TextFormField(
+            enabled: enabled,
             controller: bloodEditingController,
             decoration: InputDecoration(
                 hintText: Constants.bloodHint,
@@ -106,6 +111,7 @@ class CustomFormWidget extends StatelessWidget {
           ),
           SizedBox(height: 20),
           TextFormField(
+            enabled: enabled,
             controller: stdEditingController,
             decoration: InputDecoration(
               hintText: Constants.divisionHint,
@@ -142,8 +148,17 @@ class CustomFormWidget extends StatelessWidget {
     _formkey.currentState!.reset();
   }
 
-  void update() {
-    bloc.add();
+  update() {
+    bloc.add(UpdateStudentEvent(
+      index: index!,
+      name: nameEditingController.text,
+      address: addressEditingController.text,
+      age: int.parse(ageEditingController.text),
+      bloodgrp: bloodEditingController.text,
+      number: numberEditingController.text,
+      division: stdEditingController.text,
+      image: compressed ?? image,
+    ));
   }
 
   imagePick() async {

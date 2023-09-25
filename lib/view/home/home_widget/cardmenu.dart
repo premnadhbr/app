@@ -28,7 +28,7 @@ class CardWidget extends StatelessWidget {
             SvgPicture.asset(
               path,
               fit: BoxFit.contain,
-              height: MediaQuery.sizeOf(context).width / 1.5,
+              height: MediaQuery.sizeOf(context).width / 1.4,
             ),
             Constants.heightSized,
             Row(

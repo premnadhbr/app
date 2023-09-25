@@ -31,6 +31,7 @@ class AddStudentPage extends StatelessWidget {
                 children: [
                   Constants.addFormTitle,
                   CustomFormWidget(
+                    enabled: true,
                     bloc: addBloc,
                     option: true,
                   ),
