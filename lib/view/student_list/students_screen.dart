@@ -70,8 +70,8 @@ class _StudentsPageState extends State<StudentsPage> {
                         SlidableAction(
                           icon: Icons.delete,
                           onPressed: (context) {
-                            // studentsBloc.add(DeleteClickedEvent(
-                            //     index: successState.students[index]["id"]));
+                            studentsBloc.add(DeleteClickedEvent(
+                                index: successState.students[index]['id']));
                           },
                         ),
                       ]),
