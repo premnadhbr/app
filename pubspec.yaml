@@ -46,6 +46,12 @@ dependencies:
   velocity_x: ^4.1.1
   liquid_pull_to_refresh: ^3.0.1
   flutter_slidable: ^3.0.0
+  google_sign_in: ^6.1.5
+  firebase_auth: ^4.10.0
+  firebase_core: ^2.16.0
+  cloud_firestore: ^4.9.2
+
+
 
 
 dev_dependencies:
@@ -76,6 +82,8 @@ flutter:
     # - images/a_dot_ham.jpeg
     - assets/svg/addstudent.svg
     - assets/svg/viewstudent.svg
+    - assets/svg/1534129544.svg
+   
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

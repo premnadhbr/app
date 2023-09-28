@@ -3,11 +3,17 @@ import 'package:bloc_mini_project_hive/controller/studentLIst/bloc/students_bloc
 import 'package:bloc_mini_project_hive/controller/theme/bloc/theme_bloc.dart';
 import 'package:bloc_mini_project_hive/utils/constants/app_theme.dart';
 import 'package:bloc_mini_project_hive/view/home/home.dart';
+import 'package:bloc_mini_project_hive/view/login/login.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'firebase_options.dart';
 
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider(
@@ -37,7 +43,7 @@ class MyApp extends StatelessWidget {
           theme: lightTheme,
           darkTheme: darkTheme,
           themeMode: state,
-          home: const HomeScreen(),
+          home: LoginForm(),
         );
       },
     );
