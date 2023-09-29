@@ -1,9 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_mini_project_hive/model/student_database.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/physics.dart';
-import 'package:meta/meta.dart';
 import '../../../utils/constants/constants.dart';
 part 'details_event.dart';
 part 'details_state.dart';

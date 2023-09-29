@@ -5,7 +5,6 @@ import 'package:bloc_mini_project_hive/view/home/home_widget/cardmenu.dart';
 import 'package:bloc_mini_project_hive/view/student_list/students_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../controller/theme/bloc/theme_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => StudentsPage(),
+                builder: (context) => const StudentsPage(),
               ));
         }
       },
@@ -44,19 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           drawer: Drawer(
             child: ListView(
-              children: [
-                ListTile(
-                  title: Text('Dark Theme'),
-                  trailing: Switch(
-                    value: context.read<ThemeBloc>().state == ThemeMode.dark,
-                    onChanged: (value) {
-                      context
-                          .read<ThemeBloc>()
-                          .add(ThemeChanged(isDark: value));
-                    },
-                  ),
-                ),
-              ],
+              children: [],
             ),
           ),
           body: SingleChildScrollView(

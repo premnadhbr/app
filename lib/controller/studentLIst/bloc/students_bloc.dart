@@ -1,9 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_mini_project_hive/model/student_database.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/physics.dart';
-import 'package:meta/meta.dart';
 part 'students_event.dart';
 part 'students_state.dart';
 
@@ -17,7 +14,7 @@ class StudentsBloc extends Bloc<StudentsEvent, StudentsState> {
   FutureOr<void> studentsInitialEvent(
       StudentsInitialEvent event, Emitter<StudentsState> emit) async {
     emit(StudentsLoadingState());
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     try {
       final dataList = await StudentDatabase.getAllStudents();
       emit(StudentsLoadedState(students: dataList));

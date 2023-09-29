@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:bloc_mini_project_hive/controller/addStudent/bloc/add_student_bloc.dart';
 import 'package:bloc_mini_project_hive/utils/constants/constants.dart';
 import '../../controller/details/bloc/details_bloc.dart';
+
 // ignore: must_be_immutable
 class CustomFormWidget extends StatelessWidget {
   var bloc;
@@ -34,7 +35,7 @@ class CustomFormWidget extends StatelessWidget {
     this.index,
   }) : super(key: key);
 
-  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   final TextEditingController nameEditingController = TextEditingController();
   final TextEditingController ageEditingController = TextEditingController();
@@ -67,7 +68,7 @@ class CustomFormWidget extends StatelessWidget {
             decoration: InputDecoration(
               hintText: Constants.nameHint,
               label: Text(Constants.nameString),
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
             ),
           ),
           const SizedBox(height: 20),
@@ -77,7 +78,7 @@ class CustomFormWidget extends StatelessWidget {
             decoration: InputDecoration(
               hintText: Constants.ageHint,
               label: Text(Constants.ageString),
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
             ),
             controller: ageEditingController,
           ),
@@ -88,7 +89,7 @@ class CustomFormWidget extends StatelessWidget {
             decoration: InputDecoration(
                 hintText: Constants.numberHint,
                 label: Text(Constants.contactString),
-                border: OutlineInputBorder()),
+                border: const OutlineInputBorder()),
           ),
           const SizedBox(height: 20),
           TextFormField(
@@ -97,7 +98,7 @@ class CustomFormWidget extends StatelessWidget {
             decoration: InputDecoration(
               hintText: Constants.addressHint,
               label: Text(Constants.addressString),
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
             ),
           ),
           const SizedBox(height: 20),
@@ -107,22 +108,22 @@ class CustomFormWidget extends StatelessWidget {
             decoration: InputDecoration(
                 hintText: Constants.bloodHint,
                 label: Text(Constants.bloodString),
-                border: OutlineInputBorder()),
+                border: const OutlineInputBorder()),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           TextFormField(
             enabled: enabled,
             controller: stdEditingController,
             decoration: InputDecoration(
               hintText: Constants.divisionHint,
               label: Text(Constants.divisionString),
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
             ),
           ),
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: imagePick,
-            child: Icon(Icons.image_search_outlined),
+            child: const Icon(Icons.image_search_outlined),
           ),
           const SizedBox(height: 20),
           ElevatedButton(

@@ -1,7 +1,5 @@
 import 'package:bloc_mini_project_hive/view/home/home.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'dart:html';
 import '../../utils/authentication/firebaseAuthentication.dart';
 
 class LoginForm extends StatefulWidget {
@@ -42,7 +40,7 @@ class _LoginFormState extends State<LoginForm> {
                     const SizedBox(height: 10),
                     TextFormField(
                       controller: emailEditingController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'E-mail',
                         border: OutlineInputBorder(),
                       ),
@@ -58,7 +56,7 @@ class _LoginFormState extends State<LoginForm> {
                     TextFormField(
                       controller: passEditingController,
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Password',
                         border: OutlineInputBorder(),
                       ),
@@ -80,7 +78,7 @@ class _LoginFormState extends State<LoginForm> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => HomeScreen(),
+                                builder: (context) => const HomeScreen(),
                               ));
                         }
                       },

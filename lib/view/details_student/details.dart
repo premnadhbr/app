@@ -36,12 +36,12 @@ class _StudentDetailsState extends State<StudentDetails> {
           detailsBloc.add(DetailsInitialEvent());
         } else if (state is DetailsUpdatedState) {
           ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('Student Detail Updated')));
+              .showSnackBar(const SnackBar(content: Text('Student Detail Updated')));
         }
       },
       builder: (context, state) {
         if (state is DetailsLoadingState) {
-          return Scaffold(
+          return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
             ),
