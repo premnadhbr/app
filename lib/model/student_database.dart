@@ -3,15 +3,14 @@ import 'dart:typed_data';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-
 class StudentDatabase {
-  static Future<Database> _openDb() async {  
+  static Future<Database> _openDb() async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, "student_db.db");
     return openDatabase(path, version: 1, onCreate: _createDb);
   }
 
-  static FutureOr<void> _createDb(Database db, int version) async { 
+  static FutureOr<void> _createDb(Database db, int version) async {
     await db.execute('''CREATE TABLE student (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT,
@@ -31,7 +30,7 @@ class StudentDatabase {
     required String bloodgroup,
     required String address,
     required String division,
-     Uint8List? imageBytes,
+    Uint8List? imageBytes,
   }) async {
     final db = await _openDb();
     final data = {
@@ -59,11 +58,5 @@ class StudentDatabase {
   static Future<List<Map<String, dynamic>>> getAllStudents() async {
     final db = await _openDb();
     return db.query('student');
-  }
-
-  static Future<void> clearDb() async {
-    final dbPath = await getDatabasesPath();
-    final path = join(dbPath, "student_db.db");
-    await deleteDatabase(path);
   }
 }
