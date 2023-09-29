@@ -31,14 +31,6 @@ class _LoginFormState extends State<LoginForm> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Lottie.asset('assets/svg/Animation - 1689407515577.json'),
-                    const Text(
-                      ' Login',
-                      style: TextStyle(
-                        color: Colors.blueGrey,
-                        fontSize: 32,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
                     const SizedBox(height: 10),
                     TextFormField(
                       controller: emailEditingController,
