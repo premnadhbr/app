@@ -40,8 +40,7 @@ class CustomFormWidget extends StatelessWidget {
   final TextEditingController nameEditingController = TextEditingController();
   final TextEditingController ageEditingController = TextEditingController();
   final TextEditingController numberEditingController = TextEditingController();
-  final TextEditingController addressEditingController =
-      TextEditingController();
+  final TextEditingController addressEditingController = TextEditingController();
   final TextEditingController bloodEditingController = TextEditingController();
   final TextEditingController stdEditingController = TextEditingController();
 
