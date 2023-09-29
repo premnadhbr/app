@@ -50,6 +50,7 @@ dependencies:
   firebase_auth: ^4.10.0
   firebase_core: ^2.16.0
   cloud_firestore: ^4.9.2
+  lottie: ^2.6.0
 
 
 
@@ -83,6 +84,7 @@ flutter:
     - assets/svg/addstudent.svg
     - assets/svg/viewstudent.svg
     - assets/svg/1534129544.svg
+    - assets/svg/
    
 
 

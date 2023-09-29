@@ -1,5 +1,6 @@
 import 'package:bloc_mini_project_hive/view/home/home.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import '../../utils/authentication/firebaseAuthentication.dart';
 
 class LoginForm extends StatefulWidget {
@@ -29,6 +30,7 @@ class _LoginFormState extends State<LoginForm> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    Lottie.asset('assets/svg/Animation - 1689407515577.json'),
                     const Text(
                       ' Login',
                       style: TextStyle(
@@ -84,7 +86,8 @@ class _LoginFormState extends State<LoginForm> {
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                            Colors.red), // Background color
+                            Color.fromARGB(
+                                255, 48, 83, 118)), // Background color
                         elevation:
                             MaterialStateProperty.all(8), // Elevation (shadow)
                         shape:
