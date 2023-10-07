@@ -8,7 +8,7 @@ class CardWidget extends StatelessWidget {
   final String path;
   final event;
   final String buttonText;
-  CardWidget({
+  const CardWidget({
     Key? key,
     required this.event,
     required this.homeBloc,
