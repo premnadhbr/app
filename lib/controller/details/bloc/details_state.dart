@@ -16,6 +16,8 @@ class DetailsLoadedsuccessState extends DetailsState {
   });
 }
 
+class DetailsBackState extends DetailsActionstate{}
+
 class DetailsUpdatedState extends DetailsActionstate {}
 
 class DetailsErrorState extends DetailsState {}

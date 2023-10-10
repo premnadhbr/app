@@ -1,3 +1,4 @@
+import 'package:bloc_mini_project_hive/view/student_list/students_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_mini_project_hive/controller/details/bloc/details_bloc.dart';
@@ -24,6 +25,11 @@ class _StudentDetailsState extends State<StudentDetails> {
     super.initState();
   }
 
+  void rebuildPreviousScreen() {
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const StudentsPage()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<DetailsBloc, DetailsState>(
@@ -35,8 +41,10 @@ class _StudentDetailsState extends State<StudentDetails> {
           enabled = !enabled;
           detailsBloc.add(DetailsInitialEvent());
         } else if (state is DetailsUpdatedState) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text('Student Detail Updated')));
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Student Detail Updated')));
+        } else if (state is DetailsBackState) {
+          rebuildPreviousScreen();
         }
       },
       builder: (context, state) {

@@ -43,6 +43,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
 
       await StudentDatabase.updateData(event.index, data);
       emit(DetailsUpdatedState());
+      emit(DetailsBackState());
     } catch (e) {
       print(e);
     }
