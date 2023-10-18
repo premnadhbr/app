@@ -1,5 +1,7 @@
 import 'package:bloc_mini_project_hive/controller/details/bloc/details_bloc.dart';
 import 'package:bloc_mini_project_hive/controller/studentLIst/bloc/students_bloc.dart';
+import 'package:bloc_mini_project_hive/controller/switch/bloc/switch_bloc.dart';
+import 'package:bloc_mini_project_hive/utils/constants/app_theme.dart';
 import 'package:bloc_mini_project_hive/view/login/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,9 @@ void main() async {
       ),
       BlocProvider(
         create: (context) => DetailsBloc(),
+      ),
+      BlocProvider(
+        create: (context) => SwitchBloc(),
       )
     ],
     child: const MyApp(),
@@ -29,10 +34,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      home: LoginForm(),
+    return BlocBuilder<SwitchBloc, SwitchState>(
+      builder: (context, state) {
+        return MaterialApp(
+          theme: state.switchValue ? darkTheme : lightTheme,
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          home: LoginForm(),
+        );
+      },
     );
   }
 }

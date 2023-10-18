@@ -1,4 +1,5 @@
 import 'package:bloc_mini_project_hive/controller/home/bloc/home_bloc.dart';
+import 'package:bloc_mini_project_hive/controller/switch/bloc/switch_bloc.dart';
 import 'package:bloc_mini_project_hive/utils/constants/constants.dart';
 import 'package:bloc_mini_project_hive/view/add_student/addScreen.dart';
 import 'package:bloc_mini_project_hive/view/home/home_widget/cardmenu.dart';
@@ -15,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final HomeBloc homeBloc = HomeBloc();
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeBloc, HomeState>(
@@ -43,7 +45,32 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           drawer: Drawer(
             child: ListView(
-              children: const [],
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      BlocBuilder<SwitchBloc, SwitchState>(
+                        builder: (context, state) {
+                          return Switch(
+                            value: state.switchValue,
+                            onChanged: (value) {
+                              value
+                                  ? context
+                                      .read<SwitchBloc>()
+                                      .add(SwitchOnEvent())
+                                  : context
+                                      .read<SwitchBloc>()
+                                      .add(SwitchOffEvent());
+                            },
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
           body: SingleChildScrollView(

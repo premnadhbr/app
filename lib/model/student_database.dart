@@ -30,7 +30,7 @@ class StudentDatabase {
     required String bloodgroup,
     required String address,
     required String division,
-    Uint8List? imageBytes,
+    required Uint8List imageBytes,
   }) async {
     final db = await _openDb();
     final data = {
