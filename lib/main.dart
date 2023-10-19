@@ -6,10 +6,16 @@ import 'package:bloc_mini_project_hive/view/login/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
+import 'controller/switch/bloc/switch_state.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final storage = HydratedStorage.build(
+      storageDirectory: await getApplicationDocumentsDirectory());
+  HydratedBloc.storage = await storage;
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -23,7 +29,7 @@ void main() async {
       ),
       BlocProvider(
         create: (context) => SwitchBloc(),
-      )
+      ),
     ],
     child: const MyApp(),
   ));
