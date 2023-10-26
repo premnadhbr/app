@@ -1,3 +1,4 @@
+import 'package:bloc_mini_project_hive/utils/services/notifications.dart';
 import 'package:bloc_mini_project_hive/view/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';

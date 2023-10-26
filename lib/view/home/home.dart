@@ -1,11 +1,13 @@
 import 'package:bloc_mini_project_hive/controller/home/bloc/home_bloc.dart';
 import 'package:bloc_mini_project_hive/controller/switch/bloc/switch_bloc.dart';
 import 'package:bloc_mini_project_hive/utils/constants/constants.dart';
+import 'package:bloc_mini_project_hive/utils/services/notifications.dart';
 import 'package:bloc_mini_project_hive/view/add_student/addScreen.dart';
 import 'package:bloc_mini_project_hive/view/home/home_widget/cardmenu.dart';
 import 'package:bloc_mini_project_hive/view/student_list/students_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 import '../../controller/switch/bloc/switch_state.dart';
 
@@ -18,6 +20,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final HomeBloc homeBloc = HomeBloc();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

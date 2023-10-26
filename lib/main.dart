@@ -1,9 +1,8 @@
 import 'package:bloc_mini_project_hive/controller/details/bloc/details_bloc.dart';
 import 'package:bloc_mini_project_hive/controller/studentLIst/bloc/students_bloc.dart';
 import 'package:bloc_mini_project_hive/controller/switch/bloc/switch_bloc.dart';
-import 'package:bloc_mini_project_hive/utils/api/firebase_api.dart';
 import 'package:bloc_mini_project_hive/utils/constants/app_theme.dart';
-import 'package:bloc_mini_project_hive/view/home/home.dart';
+import 'package:bloc_mini_project_hive/utils/services/notifications.dart';
 import 'package:bloc_mini_project_hive/view/login/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
