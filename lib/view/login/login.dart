@@ -66,6 +66,10 @@ class _LoginFormState extends State<LoginForm> {
                     const SizedBox(height: 10),
                     ElevatedButton(
                       onPressed: () {
+                        LocalNotification.showSimpleNotification(
+                            title: "Simple Notification",
+                            body: "This is a simple notification",
+                            payload: "This is a simple data");
                         if (formkey.currentState!.validate()) {
                           formkey.currentState!.save();
                           AuthServices.signupUser(emailEditingController.text,
