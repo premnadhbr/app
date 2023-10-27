@@ -3,6 +3,7 @@ import 'package:bloc_mini_project_hive/controller/studentLIst/bloc/students_bloc
 import 'package:bloc_mini_project_hive/controller/switch/bloc/switch_bloc.dart';
 import 'package:bloc_mini_project_hive/utils/constants/app_theme.dart';
 import 'package:bloc_mini_project_hive/utils/services/notifications.dart';
+import 'package:bloc_mini_project_hive/utils/services/push_notification.dart';
 import 'package:bloc_mini_project_hive/view/login/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +15,16 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-    await LocalNotification.init();
+
+  await LocalNotification.init();
+
   final storage = HydratedStorage.build(
       storageDirectory: await getApplicationDocumentsDirectory());
   HydratedBloc.storage = await storage;
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseApi.initNotifications();
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider(

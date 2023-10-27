@@ -83,7 +83,7 @@ class _LoginFormState extends State<LoginForm> {
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(
+                            const Color.fromARGB(
                                 255, 48, 83, 118)), // Background color
                         elevation:
                             MaterialStateProperty.all(8), // Elevation (shadow)
