@@ -5,7 +5,7 @@ class FirebaseApi {
   static final _firebaseMessaging = FirebaseMessaging.instance;
   //function to initialize notifications
   static Future<void> initNotifications() async {
-    //request permission from the user
+    //request permission from getting notification
     await _firebaseMessaging.requestPermission();
     //then fetch FCM TOCKEN for the device
     final fCMTocken = await _firebaseMessaging.getToken();
