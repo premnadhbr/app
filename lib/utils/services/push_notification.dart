@@ -1,5 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-
+//firebase cloud messaging
 class FirebaseApi {
   //creating an instance of firebase messaging
   static final _firebaseMessaging = FirebaseMessaging.instance;

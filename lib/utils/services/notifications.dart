@@ -12,6 +12,7 @@ class LocalNotification {
         DarwinInitializationSettings(
       onDidReceiveLocalNotification: (id, title, body, payload) => null,
     );
+    //compine ios and android for easily initialising
     final InitializationSettings initializationSettings =
         InitializationSettings(
             android: initializationSettingsAndroid,
@@ -22,18 +23,21 @@ class LocalNotification {
     );
   }
 
-  //simple notification
+  // notification
   static Future showSimpleNotification({
     required String title,
     required String body,
     required String payload,
   }) async {
+    //customize notification how will be present  on android 
     const AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails('your channel id', 'your channel name',
             channelDescription: 'your channel description',
             importance: Importance.max,
             priority: Priority.high,
             ticker: 'ticker');
+
+            //for platform specific notification
     const NotificationDetails notificationDetails =
         NotificationDetails(android: androidNotificationDetails);
     await _flutterLocalNotificationsPlugin
