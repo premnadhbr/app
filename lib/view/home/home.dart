@@ -25,115 +25,123 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeBloc, HomeState>(
-      bloc: homeBloc,
-      buildWhen: (previous, current) => current is! HomeActionState,
-      listenWhen: (previous, current) => current is HomeActionState,
-      listener: (context, state) {
-        if (state is HomeNavigateToAddingPageActionState) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => AddStudentPage(),
-              ));
-        } else if (state is HomeNavigateToStudentListPageActionState) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const StudentsPage(),
-              ));
-        } else if (state is HomeLocationGetstate) {
-          current = state.current;
-          log("messa23ge");
-          homeBloc.add(Homeinitialevent());
-        }
-      },
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Constants.homeTitleString,
-          ),
-          drawer: Drawer(
-            child: ListView(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      BlocBuilder<SwitchBloc, SwitchState>(
-                        builder: (context, state) {
-                          return Switch(
-                            value: state.switchValue,
-                            onChanged: (value) {
-                              value
-                                  ? context
-                                      .read<SwitchBloc>()
-                                      .add(SwitchOnEvent())
-                                  : context
-                                      .read<SwitchBloc>()
-                                      .add(SwitchOffEvent());
-                            },
-                          );
-                        },
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+    return BlocProvider(
+      create: (context) => HomeBloc(),
+      child: BlocListener<HomeBloc, HomeState>(
+        bloc: homeBloc,
+        // buildWhen: (previous, current) => current is! HomeActionState,
+        // listenWhen: (previous, current) => current is HomeActionState,
+        listener: (context, state) {
+          if (state is HomeNavigateToAddingPageActionState) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddStudentPage(),
+                ));
+          } else if (state is HomeNavigateToStudentListPageActionState) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const StudentsPage(),
+                ));
+          } else if (state is HomeLocationGetstate) {
+            current = state.current;
+            log("messa23ge");
+            homeBloc.add(Homeinitialevent());
+          }
+        },
+        child: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            return Scaffold(
+              appBar: AppBar(
+                title: Constants.homeTitleString,
+              ),
+              drawer: Drawer(
+                child: ListView(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Column(
+                          BlocBuilder<SwitchBloc, SwitchState>(
+                            builder: (context, state) {
+                              return Switch(
+                                value: state.switchValue,
+                                onChanged: (value) {
+                                  value
+                                      ? context
+                                          .read<SwitchBloc>()
+                                          .add(SwitchOnEvent())
+                                      : context
+                                          .read<SwitchBloc>()
+                                          .add(SwitchOffEvent());
+                                },
+                              );
+                            },
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const SizedBox(height: 10),
-                              const Text(
-                                'Location Cordinates',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                current,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              TextButton(
-                                  onPressed: () {
-                                    log("message");
-                                    homeBloc.add(HomeLocationEvent());
-                                  },
-                                  child: const Text("Get Location"))
+                              Column(
+                                children: [
+                                  const SizedBox(height: 10),
+                                  const Text(
+                                    'Location Cordinates',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    current,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextButton(
+                                      onPressed: () {
+                                        log("message");
+                                        // homeBloc.add(HomeLocationEvent());
+                                        context
+                                            .read<HomeBloc>()
+                                            .add(HomeLocationEvent());
+                                      },
+                                      child: const Text("Get Location"))
+                                ],
+                              )
                             ],
-                          )
+                          ),
                         ],
                       ),
+                    )
+                  ],
+                ),
+              ),
+              body: SingleChildScrollView(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CardWidget(
+                          event: HomeNavigateToAddEvent(),
+                          homeBloc: homeBloc,
+                          path: Constants.addCardmenuImageLogo,
+                          buttonText: Constants.addStudentString),
+                      CardWidget(
+                          event: HomeNavigateToStudentListEvent(),
+                          homeBloc: homeBloc,
+                          path: Constants.viewCardmenuImageLogo,
+                          buttonText: Constants.viewStudentString)
                     ],
                   ),
-                )
-              ],
-            ),
-          ),
-          body: SingleChildScrollView(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CardWidget(
-                      event: HomeNavigateToAddEvent(),
-                      homeBloc: homeBloc,
-                      path: Constants.addCardmenuImageLogo,
-                      buttonText: Constants.addStudentString),
-                  CardWidget(
-                      event: HomeNavigateToStudentListEvent(),
-                      homeBloc: homeBloc,
-                      path: Constants.viewCardmenuImageLogo,
-                      buttonText: Constants.viewStudentString)
-                ],
+                ),
               ),
-            ),
-          ),
-        );
-      },
+            );
+          },
+        ),
+      ),
     );
   }
 }

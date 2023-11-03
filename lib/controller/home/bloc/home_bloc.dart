@@ -26,7 +26,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> homeLocationEvent(
       HomeLocationEvent event, Emitter<HomeState> emit) async {
-      //checking is checking the divice location service id enabled or not.
+    //checking is checking the divice location service id enabled or not.
     var servicePermission = await Geolocator.isLocationServiceEnabled();
     if (!servicePermission) {
       log("Service disabled");
@@ -34,13 +34,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     //check app location permission status
     var permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
-      //requesting for user permission 
+      //requesting for user permission
       permission = await Geolocator.requestPermission();
     }
     //returns current postion of the device
     var current = await Geolocator.getCurrentPosition();
-    
-   
+
+    // place mark obj
     List<Placemark> placesMarks =
         await placemarkFromCoordinates(current!.latitude, current!.longitude);
     Placemark place = placesMarks[0];
